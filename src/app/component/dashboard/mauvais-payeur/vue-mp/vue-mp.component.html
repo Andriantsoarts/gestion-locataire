@@ -1,0 +1,23 @@
+<mat-card class="m-3">
+    <mat-card-header>
+      <mat-card-title>{{mp_obj?.mp_nom}}</mat-card-title>
+      <mat-card-subtitle>{{mp_obj?.mp_telephone}}</mat-card-subtitle>
+    </mat-card-header>
+    <hr>
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <mat-card-content>
+                <span> N° CIN : </span>{{mp_obj?.mp_cin}} <br>
+                <span> Genre : </span>{{mp_obj?.genre}}<br>
+                <span> Ville : </span>{{mp_obj?.ville}}<br>
+
+            </mat-card-content>
+        </div>
+        <div class="col-md-6">
+            <mat-card-content>
+                <span> Date d'admission : </span>{{mp_obj?.date_admission.toDate()}}<br>
+                <span> Motif d'admission : </span>{{mp_obj?.motif_admission}}<br>
+            </mat-card-content>
+        </div>
+    </div>
+</mat-card>

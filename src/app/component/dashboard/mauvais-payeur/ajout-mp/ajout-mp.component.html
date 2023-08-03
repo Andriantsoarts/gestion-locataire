@@ -1,0 +1,67 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content [formGroup]="form">
+    <mat-grid-list cols="2">
+        <mat-grid-tile>
+            <div>
+                <mat-form-field>
+                    <mat-label>Nom complet </mat-label>
+                    <input matInput placeholder="ex: RAKOTO Be" formControlName="mp_nom" required>
+                    <mat-error *ngIf="form.get('mp_nom')?.invalid || form.get('mp_nom')?.dirty || form.get('mp_nom')?.touched">Entrer le nom complet!</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Numéro de téléphone </mat-label>
+                    <input matInput placeholder="ex: 0323232232" formControlName="mp_telephone" required>
+                    <mat-error *ngIf="form.get('mp_telephone')?.invalid || form.get('mp_telephone')?.dirty || form.get('mp_telephone')?.touched">Entrer un numero de téléphone!</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>N° CIN </mat-label>
+                    <input matInput placeholder="ex: 101241101101" formControlName="mp_cin" required>
+                    <mat-error *ngIf="form.get('mp_cin')?.invalid || form.get('mp_cin')?.dirty || form.get('mp_cin')?.touched">Entrer le numero du CIN de la personne!</mat-error>
+                </mat-form-field>
+                <mat-form-field > 
+                    <mat-label>Nom du propriétaire de la maison louer anciènement</mat-label> 
+                    <mat-select formControlName="prop_id" name="prop_id"> 
+                        <mat-option *ngFor="let prop of all_prop" [value]="prop.prop_id">
+                            {{prop.prop_nom}}
+                        </mat-option >  
+                    </mat-select > 
+                </mat-form-field >
+                
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div>
+                <mat-form-field > 
+                    <mat-label>Ville</mat-label> 
+                    <mat-select formControlName="ville" name="ville"> 
+                        <mat-option *ngFor="let ville of villes" [value]="ville">
+                            {{ville}}
+                        </mat-option >  
+                    </mat-select > 
+                </mat-form-field >
+                <mat-label><br> Genre <br> </mat-label>
+                <mat-radio-group  aria-label = "Sélectionner le genre" color="primary" formControlName="genre"> 
+                    <mat-radio-button  value = "Homme" > Homme </mat-radio-button> 
+                    <mat-radio-button  value = "Femme" > Femme </mat-radio-button> 
+                </mat-radio-group>
+                <mat-form-field>
+                    <mat-label>Date d'admission</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="date_admission">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker><mat-error *ngIf="form.get('date_admission')?.invalid || form.get('date_admission')?.dirty || form.get('date_admission')?.touched">Choisir une date valide!</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Motif d'admission</mat-label>
+                    <input matInput placeholder="ex: 3 mois non payer" formControlName="motif_admission" required>
+                    <mat-error *ngIf="form.get('motif_admission')?.invalid || form.get('motif_admission')?.dirty || form.get('motif_admission')?.touched">Entrer le motif de l'admission de la personne!</mat-error>
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</mat-dialog-content>
+<div mat-dialog-actions>
+    <button mat-raised-button color="warn" mat-dialog-close (click)="annulation()">Annuler</button>
+    <button mat-raised-button color="primary" cdkFocusInitial (click)="enregistrement()" [disabled]="form.invalid">{{buttonName}}</button>
+</div>
