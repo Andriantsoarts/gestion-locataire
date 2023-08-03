@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{titre}}</h1>
+<div mat-dialog-content>
+  <p>Êtes-vous sûre de vouloir supprimé {{proprietairenom}} de la liste?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="close()">Non, merci</button>
+  <button mat-raised-button  color = "warn" (click)="delete()">Supprimer</button>
+</div>

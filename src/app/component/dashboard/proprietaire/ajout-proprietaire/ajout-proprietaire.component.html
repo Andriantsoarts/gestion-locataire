@@ -1,0 +1,64 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content [formGroup]="form">
+    <mat-grid-list cols="2">
+        <mat-grid-tile>
+            <div>
+                <mat-form-field>
+                    <mat-label>Nom complet </mat-label>
+                    <input matInput placeholder="ex: RAKOTO Be" formControlName="nom" required>
+                    <mat-error *ngIf="form.get('nom')?.invalid || form.get('nom')?.dirty || form.get('nom')?.touched">Entrer le nom complet!</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Numéro de téléphone </mat-label>
+                    <input matInput placeholder="ex: 0323232232" formControlName="telephone" required>
+                    <mat-error *ngIf="form.get('telephone')?.invalid || form.get('telephone')?.dirty || form.get('telephone')?.touched">Entrer un numero de téléphone!</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Travail </mat-label>
+                    <input matInput placeholder="ex: Plombier" formControlName="travail" required>
+                    <mat-error *ngIf="form.get('travail')?.invalid || form.get('travail')?.dirty || form.get('travail')?.touched">Entrer le travail de la personne!</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Adresse </mat-label>
+                    <input matInput placeholder="ex: Lot XVIII Anatiala" formControlName="adresse_prop" required>
+                    <mat-error *ngIf="form.get('adresse_prop')?.invalid || form.get('adresse_prop')?.dirty || form.get('adresse_prop')?.touched">Entrer l'adresse de la personne!</mat-error>
+                </mat-form-field>
+                
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div>
+                <mat-form-field > 
+                    <mat-label>Ville</mat-label> 
+                    <mat-select formControlName="ville" name="ville"> 
+                        <mat-option *ngFor="let ville of villes" [value]="ville">
+                            {{ville}}
+                        </mat-option >  
+                    </mat-select > 
+                </mat-form-field >
+                <mat-label><br> Genre <br> </mat-label>
+                <mat-radio-group  aria-label = "Sélectionner le genre" color="primary" formControlName="genre"> 
+                    <mat-radio-button  value = "Homme" > Homme </mat-radio-button> 
+                    <mat-radio-button  value = "Femme" > Femme </mat-radio-button> 
+                </mat-radio-group>
+                <mat-form-field>
+                    <mat-label>Date de naissance</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="datenais">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker><mat-error *ngIf="form.get('datenais')?.invalid || form.get('datenais')?.dirty || form.get('datenais')?.touched">Choisir une date de naissance valide!</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Adresse en location</mat-label>
+                    <input matInput placeholder="ex: Lot XVIII Anatiala" formControlName="adresse_en_location" required>
+                    <mat-error *ngIf="form.get('adresse_en_location')?.invalid || form.get('adresse_en_location')?.dirty || form.get('adresse_en_location')?.touched">Entrer l'adresse de la propriété mis en location!</mat-error>
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</mat-dialog-content>
+<div mat-dialog-actions>
+    <button mat-raised-button color="warn" mat-dialog-close (click)="annulation()">Annuler</button>
+    <button mat-raised-button color="primary" cdkFocusInitial (click)="enregistrement()" [disabled]="form.invalid">{{buttonName}}</button>
+</div>
